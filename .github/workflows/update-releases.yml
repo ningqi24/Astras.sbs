@@ -40,8 +40,12 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
+          git stash push -m "temp changes" -- public/releases.json
+
           git config pull.rebase true
           git pull origin ${{ github.ref_name }}
+
+          git stash pop
 
           git add public/releases.json
 
