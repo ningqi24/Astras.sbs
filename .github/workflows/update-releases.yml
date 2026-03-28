@@ -42,6 +42,11 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
+          git reset --hard HEAD
+          git clean -fd
+
+          git pull origin ${{ github.ref_name }} --rebase || true
+
           cp /tmp/releases.json public/releases.json
 
           git add public/releases.json
