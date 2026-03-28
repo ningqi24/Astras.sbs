@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm install node-fetch
 
+      - name: Pull latest changes
+        run: git pull --rebase origin main
+
       - name: Generate releases.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -31,8 +34,8 @@ jobs:
 
       - name: Commit and push if changed
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           git add public/releases.json
           git diff --staged --quiet || git commit -m "Auto update releases.json $(date +'%Y-%m-%d %H:%M:%S')"
-          git push
+          git push origin main
