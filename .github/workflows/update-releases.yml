@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -20,12 +24,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'   
 
       - name: Install dependencies
-        run: npm install node-fetch
-
-      - name: Pull latest changes
-        run: git pull --rebase origin main
+        run: npm ci   
 
       - name: Generate releases.json
         env:
@@ -38,4 +40,4 @@ jobs:
           git config user.email "actions@github.com"
           git add public/releases.json
           git diff --staged --quiet || git commit -m "Auto update releases.json $(date +'%Y-%m-%d %H:%M:%S')"
-          git push origin main
+          git push origin HEAD:${{ github.ref_name }}
