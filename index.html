@@ -8,6 +8,10 @@
   <style>
     :root {
       --sf-img-1: url("logo.svg");
+    }
+  </style>
+  <style>
+    :root {
       --bg-color: #111;
       --bg-secondary: #222;
       --text-primary: #eee;
@@ -17,6 +21,8 @@
       --scrollbar-thumb-hover: #777;
       --scrollbar-thumb-active: #555;
       --font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-weight: 500;
+      --font-weight-bold: 700;
     }
 
     ::-webkit-scrollbar {
@@ -49,7 +55,6 @@
       background-color: var(--bg-color);
       color: var(--text-primary);
       -webkit-text-size-adjust: 100%;
-      margin: 0 !important;
     }
 
     .bg-ae {
@@ -84,6 +89,40 @@
       max-width: 100%;
     }
 
+    .slogan {
+      color: #fff;
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 70px;
+      font-weight: bold;
+      text-shadow: 10px 10px 20px #111;
+      white-space: nowrap;
+      display: inline-block;
+      animation: blink-caret 0.75s step-end infinite;
+      overflow: hidden;
+      will-change: width;
+      transition: width 1.6s cubic-bezier(0.76, 0, 0.42, 0.99), border-right 0.3s ease;
+    }
+
+    .slogan span {
+      display: inline-block;
+    }
+
+    .slogan.typing-done {
+      border-right: none;
+    }
+
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent;
+      }
+
+      50% {
+        border-color: #0099ff;
+      }
+    }
+
     .tab {
       display: flex;
       position: fixed;
@@ -104,6 +143,7 @@
         transform: translateY(-100%);
         opacity: 0;
       }
+
       to {
         transform: translateY(0);
         opacity: 1;
@@ -125,6 +165,7 @@
         opacity: 0;
         transform: translateY(10px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -136,6 +177,7 @@
         opacity: 0;
         transform: translateX(-100%);
       }
+
       to {
         opacity: 1;
         transform: translateX(0);
@@ -179,13 +221,13 @@
       color: #eee;
     }
 
-    .proxy-selector, .other-selector {
+    .proxy-selector {
       position: relative;
       display: inline-block;
       height: 100%;
     }
 
-    .proxy-btn, .other-btn {
+    .proxy-btn {
       background-color: #00000000;
       color: #eee;
       border: 0;
@@ -200,7 +242,7 @@
       font-size: 14px;
     }
 
-    .proxy-btn:hover, .other-btn:hover {
+    .proxy-btn:hover {
       background-color: #333;
     }
 
@@ -213,7 +255,7 @@
       transition: transform 0.3s ease;
     }
 
-    .proxy-menu, .other-menu {
+    .proxy-menu {
       display: none;
       position: absolute;
       top: calc(100% + 5px);
@@ -224,17 +266,14 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.25);
       border-radius: 10px;
       z-index: 1000;
+      max-height: 220px;
+      overflow-y: auto;
       opacity: 0;
       transform: translateY(-8px);
       transition: all 0.2s ease;
     }
 
-    .proxy-menu {
-      max-height: 220px;
-      overflow-y: auto;
-    }
-
-    .proxy-menu.show, .other-menu.show {
+    .proxy-menu.show {
       display: block;
       opacity: 1;
       transform: translateY(0);
@@ -281,6 +320,54 @@
       font-size: 11px;
     }
 
+    .other-selector {
+      position: relative;
+      display: inline-block;
+      height: 100%;
+    }
+
+    .other-btn {
+      background-color: #00000000;
+      color: #eee;
+      border: 0;
+      height: 100%;
+      padding: 0 8px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .other-btn:hover {
+      background-color: #333;
+    }
+
+    .other-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 5px);
+      right: 0;
+      background: rgba(35,35,35,0.98);
+      backdrop-filter: blur(15px);
+      min-width: 180px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      border-radius: 10px;
+      z-index: 1000;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: all 0.2s ease;
+    }
+
+    .other-menu.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .other-menu-section {
       padding: 10px 16px 6px;
       color: #888;
@@ -311,6 +398,232 @@
       margin: 6px 16px;
     }
 
+    .daylight-mode {
+      --bg-color: #f8f8f8;
+      --bg-secondary: #f0f0f0;
+      --text-primary: #333;
+      --text-secondary: #666;
+      --scrollbar-thumb: #ccc;
+      --scrollbar-thumb-hover: #bbb;
+      --scrollbar-thumb-active: #aaa;
+    }
+
+    .daylight-mode .bg-ae text {
+      stroke: #333;
+    }
+
+    .daylight-mode .tab {
+      background-color: var(--bg-color);
+      opacity: 0.9;
+      filter: brightness(0.9);
+    }
+
+    .daylight-mode .tabButton {
+      color: #333;
+    }
+
+    .daylight-mode .tabButton:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    .daylight-mode .tabButton a {
+      color: #333;
+    }
+
+    .daylight-mode .download-section {
+      background-color: var(--bg-color);
+    }
+
+    .daylight-mode .download-title {
+      color: var(--text-primary);
+    }
+
+    .daylight-mode .end {
+      background-color: var(--bg-color);
+      opacity: 0.75;
+      filter: brightness(0.9);
+    }
+
+    .daylight-mode .end-copyright {
+      color: var(--text-secondary);
+    }
+
+    .daylight-mode .content {
+      background-color: var(--bg-color);
+    }
+
+    .daylight-mode .page {
+      background-color: var(--bg-color);
+      z-index: 0;
+    }
+
+    .daylight-mode .proxy-btn {
+      color: #333;
+    }
+
+    .daylight-mode .proxy-btn:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    .daylight-mode .proxy-menu {
+      background: var(--bg-color);
+    }
+
+    .daylight-mode .proxy-option {
+      color: #333;
+    }
+
+    .daylight-mode .proxy-option:hover {
+      background: var(--bg-secondary);
+      color: #333;
+    }
+
+    .daylight-mode .proxy-section-title {
+      color: #666;
+      background: rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .daylight-mode .other-btn {
+      color: #333;
+    }
+
+    .daylight-mode .other-btn:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    .daylight-mode .other-menu {
+      background: var(--bg-color);
+    }
+
+    .daylight-mode .other-menu-section {
+      color: #888;
+    }
+
+    .daylight-mode .other-menu-item {
+      color: #333;
+    }
+
+    .daylight-mode .other-menu-item:hover {
+      background: var(--bg-secondary);
+      color: #333;
+    }
+
+    .daylight-mode .theme-toggle-btn,
+    .daylight-mode #theme-toggle-btn {
+      color: #333;
+    }
+
+    .daylight-mode .titleF {
+      color: #333;
+    }
+
+    .daylight-mode .titleFintor {
+      color: #333;
+    }
+
+    .daylight-mode .featureCard {
+      background-color: var(--bg-secondary);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.075);
+    }
+
+    .daylight-mode .featureCard:hover {
+      background-color: #e0e0e0;
+    }
+
+    .daylight-mode .featureTitle {
+      color: #333;
+    }
+
+    .daylight-mode .featureDesc {
+      color: #666;
+    }
+
+    .daylight-mode .OnlineButton {
+      color: #fff;
+    }
+
+    .daylight-mode .DesktopButton {
+      background-color: #666;
+      color: #fff;
+    }
+
+    .daylight-mode .updateT {
+      color: #333;
+    }
+
+    .daylight-mode .updateTIn {
+      color: #333;
+    }
+
+    .daylight-mode .UpdateC {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: #333;
+    }
+
+    .daylight-mode .backgroundF {
+      display: none;
+    }
+
+    .daylight-mode .slogan {
+      color: #333;
+      text-shadow: 10px 10px 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .daylight-mode .introend,
+    .daylight-mode .endby,
+    .daylight-mode .link {
+      color: #333;
+    }
+
+    .daylight-mode .copyright {
+      color: #666;
+    }
+
+    .daylight-mode .footer {
+      background-color: var(--bg-secondary);
+      color: #333;
+    }
+
+    .daylight-mode .download-card {
+      background-color: var(--bg-secondary);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .daylight-mode .download-card:hover {
+      background-color: #e0e0e0;
+    }
+
+    .daylight-mode .download-name {
+      color: #333;
+    }
+
+    .daylight-mode .download-desc {
+      color: #666;
+    }
+
+    .daylight-mode .download-panel {
+      background: linear-gradient(180deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
+    }
+
+    .daylight-mode .download-item {
+      background: var(--bg-secondary);
+    }
+
+    .daylight-mode .download-item-name {
+      color: #333;
+    }
+
+    .daylight-mode .download-item-size {
+      color: #666;
+    }
+
+    .daylight-mode .download-panel-title {
+      color: #666;
+    }
+
+    
+
     .download-section {
       position: relative;
       display: flex;
@@ -327,7 +640,7 @@
       font-weight: bold;
       margin-bottom: 50px;
       text-align: center;
-      font-family: var(--font-family);
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     .download-cards {
@@ -502,14 +815,14 @@
       font-size: 1.3rem;
       font-weight: bold;
       margin-bottom: 10px;
-      font-family: var(--font-family);
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     .download-desc {
       color: var(--text-secondary);
       font-size: 0.9rem;
       text-align: center;
-      font-family: var(--font-family);
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     .download-panel {
@@ -631,6 +944,257 @@
       color: #0099ff;
     }
 
+    
+
+    @media (max-width: 768px) {
+      .download-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .download-card {
+        width: 80%;
+      }
+    }
+
+    .titleShow {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: 100px;
+      padding-bottom: 50px;
+      height: 1000px;
+    }
+
+    .LogoTitle {
+      margin-top: 160px;
+      width: 400px;
+      max-width: 90%;
+      height: auto;
+    }
+
+    .TitleShowPho {
+      width: 70%;
+      max-width: 100%;
+      height: auto;
+      position: relative;
+      left: 0;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: transform 0.1s ease-out, left 0.3s ease, width 0.3s ease, opacity 0.3s ease;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      will-change: transform;
+      object-fit: contain;
+    }
+
+    .TitleShowPho:hover {
+      transform: rotateX(15deg) translateZ(-10px);
+    }
+
+    .p3d {
+      z-index: -1;
+      position: absolute;
+      perspective: 1200px;
+      width: 80%;
+      max-width: 100%;
+      height: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 200px;
+      transition: width 0.3s ease, padding-top 0.6s ease;
+    }
+
+    .titleF {
+      color: #eee;
+      display: flex;
+      justify-content: right;
+      font-size: xx-large;
+      font-weight: bold;
+      margin-right: 40px;
+    }
+
+    .titleFintor {
+      color: #eee;
+      display: flex;
+      justify-content: right;
+      font-size: large;
+      margin-right: 80px;
+    }
+
+    .features {
+      height: 800px;
+      z-index: 1;
+    }
+
+    .backgroundF {
+      background-color: #00000055;
+      z-index: -10;
+      width: 100%;
+      height: 880px;
+      margin-top: -80px;
+      position: absolute;
+    }
+
+    .featureCards {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: 50px;
+      padding: 0 40px;
+      position: relative;
+    }
+
+    .featureCard {
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      background-color: #222;
+      border-radius: 15px;
+      padding: 30px;
+      width: 30%;
+      height: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 10px;
+      word-wrap: break-word;
+      word-break: break-word;
+      z-index: 2;
+    }
+
+    .featureCard:hover {
+      height: 200px;
+      transform: translateY(-10px);
+      background-color: #2a2a2a;
+      z-index: 10;
+    }
+
+    .featureTitle {
+      color: #eee;
+      font-size: large;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      z-index: 1;
+      text-align: right;
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .featureCard:hover .featureTitle {
+      top: 20px;
+      transform: translateY(0);
+    }
+
+    .featureDesc {
+      color: #aaa;
+      font-size: medium;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      pointer-events: none;
+    }
+
+    .featureCard:hover .featureDesc {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .OnlineButton,
+    .DesktopButton {
+      width: 120px;
+      border: 0;
+      height: 40px;
+      font-size: large;
+      margin: 10px;
+      margin-top: 20px;
+      border-radius: 10px;
+      transition: filter 0.3s ease;
+      min-height: 44px;
+    }
+
+    .OnlineButton {
+      background-color: #0099ff;
+      color: #eee;
+    }
+
+    .DesktopButton {
+      background-color: #111;
+      color: #eee;
+    }
+
+    .OnlineButton:hover,
+    .DesktopButton:hover {
+      filter: brightness(1.2);
+    }
+
+    .OnlineButton:active,
+    .DesktopButton:active {
+      filter: brightness(0.8);
+    }
+
+    .Update {
+      margin-top: 200px;
+      margin-bottom: 500px;
+    }
+
+    .updateT {
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      font-size: xx-large;
+      font-weight: bold;
+    }
+
+    .updateTIn {
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      font-size: large;
+    }
+
+    .UpdateC {
+      position: relative;
+      background-color: #000000bb;
+      border-radius: 10px;
+      color: #eee;
+      justify-content: center;
+      width: 60%;
+      margin: 20px auto;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .ubgd {
+      width: 100%;
+      margin: 30px auto;
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .ubg {
+      width: auto;
+      height: 100%;
+      margin-top: -200px;
+      filter: blur(2px);
+      opacity: 0.8;
+    }
+
     .end {
       padding: 60px;
       padding-bottom: 20px;
@@ -661,7 +1225,11 @@
       margin-top: auto;
       color: var(--text-secondary);
       font-size: 0.9rem;
-      font-family: var(--font-family);
+      font-family: 'Mi Sans', 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      margin: 0 !important;
     }
 
     .endlogo {
@@ -669,16 +1237,19 @@
       height: auto;
     }
 
-    .introend, .endby, .link {
+    .introend,
+    .endby,
+    .link {
       color: #eee;
-      font-family: var(--font-family);
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     .introend {
       font-size: small;
     }
 
-    .endby, .link {
+    .endby,
+    .link {
       font-size: x-large;
     }
 
@@ -692,7 +1263,7 @@
       padding: 20px 0;
       color: #888;
       font-size: 0.9rem;
-      font-family: var(--font-family);
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
       width: fit-content;
       margin: 0 auto;
       display: block;
@@ -722,6 +1293,546 @@
       font-size: small;
     }
 
+    @media (max-width: 1200px) {
+      .LogoTitle {
+        width: 300px;
+      }
+
+      .featureCard {
+        width: 40%;
+      }
+
+      .featureCard:hover {
+        width: 40%;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .LogoTitle {
+        width: 250px;
+      }
+
+      .slogan {
+        font-size: 50px;
+      }
+
+      .featureCards {
+        padding: 0 20px;
+      }
+
+      .featureCard {
+        width: 45%;
+      }
+
+      .featureCard:hover {
+        width: 45%;
+      }
+
+      .titleF {
+        font-size: x-large;
+        margin-right: 20px;
+      }
+
+      .titleFintor {
+        margin-right: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #tabLogo {
+        height: 35px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 20px;
+      }
+
+      .tabButtonTab {
+        margin-right: 20px;
+      }
+
+      .tabButton {
+        width: auto;
+        min-width: 50px;
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+      .slogan {
+        font-size: 36px;
+        width: 100%;
+        text-align: center;
+        margin: 20px 0;
+        word-wrap: break-word;
+      }
+
+      .slogan span {
+        display: inline-block;
+      }
+
+      .LogoTitle {
+        width: 200px;
+        margin-top: 100px;
+      }
+
+      .p3d {
+        width: 90%;
+        margin-top: 100px;
+        height: 400px;
+      }
+
+      .TitleShowPho {
+        width: 100%;
+        height: auto;
+      }
+
+      .titleShow {
+        padding-top: 50px;
+        height: 700px;
+      }
+
+      .OnlineButton,
+      .DesktopButton {
+        width: 100px;
+        font-size: 16px;
+      }
+
+      .features {
+        height: auto;
+        min-height: 600px;
+      }
+
+      .backgroundF {
+        height: 700px;
+        margin-top: -40px;
+      }
+
+      .featureCards {
+        align-items: center;
+      }
+
+      .featureCard {
+        width: 80%;
+        margin: 10px 0;
+      }
+
+      .featureCard:hover {
+        width: 80%;
+        height: auto;
+        min-height: 200px;
+      }
+
+      .featureTitle {
+        transform: none;
+        text-align: center;
+        top: 20px;
+      }
+
+      .featureCard:hover .featureTitle {
+        position: static;
+        top: auto;
+        transform: none;
+      }
+
+      .featureDesc {
+        text-align: center;
+        padding: 0 10px;
+      }
+
+      .titleF {
+        font-size: large;
+        justify-content: center;
+        margin-right: 0;
+      }
+
+      .titleFintor {
+        font-size: medium;
+        justify-content: center;
+        margin-right: 0;
+      }
+
+      .Update {
+        margin-top: 100px;
+        height: auto;
+        min-height: 500px;
+      }
+
+      .updateT {
+        font-size: x-large;
+      }
+
+      .updateTIn {
+        font-size: medium;
+      }
+
+      .ubg {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        margin-top: -100px;
+      }
+
+      .end {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: auto;
+        padding: 40px 20px;
+      }
+
+      .endlogo {
+        width: 150px;
+      }
+
+      .link {
+        margin-top: 20px;
+      }
+
+      .download-cards {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .download-card {
+        width: 90%;
+        padding: 25px 30px;
+      }
+
+      .download-panel-inner {
+        padding: 0 10px;
+      }
+
+      .filter-tabs {
+        justify-content: center;
+      }
+
+      .filter-tab {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .download-item {
+        padding: 12px 10px;
+      }
+
+      .download-item-name {
+        font-size: 14px;
+      }
+
+      .proxy-menu {
+        min-width: 160px;
+        right: -10px;
+      }
+
+      .proxy-option {
+        padding: 12px 14px;
+        font-size: 13px;
+      }
+
+      .tabButton a {
+        font-size: 13px;
+      }
+
+      .other-btn {
+        font-size: 14px;
+        padding: 0 8px;
+      }
+
+      .other-menu {
+        right: -10px;
+        min-width: 160px;
+      }
+
+      .OnlineButton,
+      .DesktopButton {
+        min-height: 48px;
+        padding: 0 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab {
+        padding: 8px 0;
+        height: 50px;
+      }
+
+      .tabButtonTab {
+        margin-right: 10px;
+      }
+
+      .tabButton {
+        min-width: 50px;
+        font-size: 12px;
+        padding: 0 5px;
+        width: auto;
+      }
+
+      .slogan {
+        font-size: 24px;
+        line-height: 1.4;
+        text-shadow: 5px 5px 10px #111;
+      }
+
+      .LogoTitle {
+        width: 150px;
+        margin-top: 60px;
+      }
+
+      .p3d {
+        margin-top: 80px;
+        height: 300px;
+      }
+
+      .titleShow {
+        padding-top: 30px;
+        height: 600px;
+        padding-bottom: 20px;
+      }
+
+      .OnlineButton,
+      .DesktopButton {
+        width: 120px;
+        height: 35px;
+        font-size: 14px;
+        margin: 5px;
+      }
+
+      .featureCard {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .featureCard:hover {
+        width: 90%;
+        height: auto;
+        min-height: 150px;
+      }
+
+      .titleF {
+        font-size: medium;
+        padding: 0 10px;
+      }
+
+      .titleFintor {
+        font-size: small;
+        padding: 0 10px;
+      }
+
+      .backgroundF {
+        height: 600px;
+        margin-top: -20px;
+      }
+
+      .features {
+        min-height: 500px;
+      }
+
+      .updateT {
+        font-size: large;
+      }
+
+      .updateTIn {
+        font-size: small;
+      }
+
+      .ubg {
+        margin-top: -80px;
+      }
+
+      .end {
+        padding: 30px 15px;
+      }
+
+      .endlogo {
+        width: 120px;
+      }
+
+      .endby {
+        font-size: medium;
+      }
+
+      .link {
+        font-size: medium;
+      }
+
+      .introend {
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
+      .footerT {
+        font-size: 9px;
+      }
+
+      .download-cards {
+        gap: 12px;
+      }
+
+      .download-card {
+        width: 95%;
+        padding: 20px 25px;
+      }
+
+      .download-name {
+        font-size: 1.1rem;
+      }
+
+      .download-panel {
+        max-height: 400px;
+      }
+
+      .download-panel.show {
+        max-height: 400px;
+        padding: 10px 0;
+      }
+
+      .download-item {
+        padding: 14px 8px;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .download-item-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      .download-item-name {
+        font-size: 13px;
+        word-break: break-all;
+      }
+
+      .download-item-size {
+        font-size: 11px;
+      }
+
+      .download-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 13px;
+      }
+
+      .proxy-menu {
+        min-width: 150px;
+        right: -15px;
+      }
+
+      .proxy-option {
+        padding: 13px 12px;
+        font-size: 12px;
+      }
+
+      .tabButton a {
+        font-size: 12px;
+      }
+
+      .OnlineButton,
+      .DesktopButton {
+        width: 130px;
+        height: 44px;
+        font-size: 14px;
+        margin: 8px;
+        min-height: 44px;
+      }
+
+    @media (max-width: 320px) {
+      .slogan {
+        font-size: 20px;
+      }
+
+      .LogoTitle {
+        width: 120px;
+        margin-top: 40px;
+      }
+
+      .p3d {
+        height: 200px;
+      }
+
+      .titleShow {
+        height: 500px;
+      }
+
+      .OnlineButton,
+      .DesktopButton {
+        width: 110px;
+        height: 40px;
+        font-size: 12px;
+        min-height: 40px;
+      }
+
+      .featureCard {
+        width: 95%;
+        padding: 15px;
+      }
+
+      .featureCard:hover {
+        width: 95%;
+      }
+
+      .featureTitle {
+        font-size: 14px;
+      }
+
+      .featureDesc {
+        font-size: 12px;
+      }
+
+      .tabButton a {
+        font-size: 11px;
+      }
+
+      .download-card {
+        width: 98%;
+        padding: 15px 20px;
+      }
+
+      .download-name {
+        font-size: 1rem;
+      }
+
+      .filter-tab {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+
+      .proxy-menu {
+        min-width: 140px;
+        right: -20px;
+      }
+
+      .proxy-option {
+        padding: 12px 10px;
+        font-size: 11px;
+      }
+
+      .other-btn {
+        font-size: 12px;
+        padding: 0 6px;
+      }
+
+      .other-menu {
+        right: -15px;
+        min-width: 140px;
+      }
+
+      .endlogo {
+        width: 100px;
+      }
+
+      .endby {
+        font-size: small;
+      }
+
+      .link {
+        font-size: small;
+      }
+    }
+  </style>
+  
+  <link rel="canonical" href="https://editors.astras.top/">
+  <meta http-equiv="content-security-policy" content="default-src 'none'; connect-src 'self'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;">
+  <style>
     .loading {
       position: fixed;
       display: flex;
@@ -755,10 +1866,12 @@
     }
 
     @keyframes circle_rotate {
+
       0% {
         transform: rotate(0deg);
         stroke-dashoffset: 160;
       }
+
       100% {
         transform: rotate(360deg);
         stroke-dashoffset: -160;
@@ -777,7 +1890,8 @@
       transform: translateY(100%);
     }
 
-    .loading_out svg, .loading_out p {
+    .loading_out svg,
+    .loading_out p {
       opacity: 0;
     }
 
@@ -829,407 +1943,7 @@
       border-bottom-style: solid;
       border-right-style: solid;
     }
-
-    .daylight-mode {
-      --bg-color: #f8f8f8;
-      --bg-secondary: #f0f0f0;
-      --text-primary: #333;
-      --text-secondary: #666;
-      --scrollbar-thumb: #ccc;
-      --scrollbar-thumb-hover: #bbb;
-      --scrollbar-thumb-active: #aaa;
-    }
-
-    .daylight-mode .bg-ae text {
-      stroke: #333;
-    }
-
-    .daylight-mode .tab {
-      background-color: var(--bg-color);
-      opacity: 0.9;
-      filter: brightness(0.9);
-    }
-
-    .daylight-mode .tabButton {
-      color: #333;
-    }
-
-    .daylight-mode .tabButton:hover {
-      background-color: var(--bg-secondary);
-    }
-
-    .daylight-mode .tabButton a {
-      color: #333;
-    }
-
-    .daylight-mode .download-section {
-      background-color: var(--bg-color);
-    }
-
-    .daylight-mode .download-title {
-      color: var(--text-primary);
-    }
-
-    .daylight-mode .end {
-      background-color: var(--bg-color);
-      opacity: 0.75;
-      filter: brightness(0.9);
-    }
-
-    .daylight-mode .end-copyright {
-      color: var(--text-secondary);
-    }
-
-    .daylight-mode .content {
-      background-color: var(--bg-color);
-    }
-
-    .daylight-mode .page {
-      background-color: var(--bg-color);
-      z-index: 0;
-    }
-
-    .daylight-mode .proxy-btn, .daylight-mode .other-btn {
-      color: #333;
-    }
-
-    .daylight-mode .proxy-btn:hover, .daylight-mode .other-btn:hover {
-      background-color: var(--bg-secondary);
-    }
-
-    .daylight-mode .proxy-menu, .daylight-mode .other-menu {
-      background: var(--bg-color);
-    }
-
-    .daylight-mode .proxy-option, .daylight-mode .other-menu-item {
-      color: #333;
-    }
-
-    .daylight-mode .proxy-option:hover, .daylight-mode .other-menu-item:hover {
-      background: var(--bg-secondary);
-      color: #333;
-    }
-
-    .daylight-mode .proxy-section-title {
-      color: #666;
-      background: rgba(0,0,0,0.05);
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .daylight-mode .other-menu-section {
-      color: #888;
-    }
-
-    .daylight-mode .theme-toggle-btn, .daylight-mode #theme-toggle-btn {
-      color: #333;
-    }
-
-    .daylight-mode .download-card {
-      background-color: var(--bg-secondary);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.075);
-    }
-
-    .daylight-mode .download-card:hover {
-      background-color: #e0e0e0;
-    }
-
-    .daylight-mode .download-name {
-      color: #333;
-    }
-
-    .daylight-mode .download-desc {
-      color: #666;
-    }
-
-    .daylight-mode .download-panel {
-      background: linear-gradient(180deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
-    }
-
-    .daylight-mode .download-item {
-      background: var(--bg-secondary);
-    }
-
-    .daylight-mode .download-item-name {
-      color: #333;
-    }
-
-    .daylight-mode .download-item-size {
-      color: #666;
-    }
-
-    .daylight-mode .download-panel-title {
-      color: #666;
-    }
-
-    @media (max-width: 768px) {
-      .download-cards {
-        flex-direction: column;
-        align-items: center;
-      }
-      .download-card {
-        width: 80%;
-      }
-      .tabButtonTab {
-        margin-right: 20px;
-      }
-      .tabButton {
-        width: auto;
-        min-width: 50px;
-        font-size: 14px;
-        padding: 0 10px;
-      }
-      .end {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        height: auto;
-        padding: 40px 20px;
-      }
-      .endlogo {
-        width: 150px;
-      }
-      .link {
-        margin-top: 20px;
-      }
-      .download-panel-inner {
-        padding: 0 10px;
-      }
-      .filter-tabs {
-        justify-content: center;
-      }
-      .filter-tab {
-        padding: 8px 12px;
-        font-size: 12px;
-      }
-      .download-item {
-        padding: 12px 10px;
-      }
-      .download-item-name {
-        font-size: 14px;
-      }
-      .proxy-menu {
-        min-width: 160px;
-        right: -10px;
-      }
-      .proxy-option {
-        padding: 12px 14px;
-        font-size: 13px;
-      }
-      .tabButton a {
-        font-size: 13px;
-      }
-      .other-btn {
-        font-size: 14px;
-        padding: 0 8px;
-      }
-      .other-menu {
-        right: -10px;
-        min-width: 160px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .tab {
-        padding: 8px 0;
-        height: 50px;
-      }
-      .tabButtonTab {
-        margin-right: 10px;
-      }
-      .tabButton {
-        min-width: 50px;
-        font-size: 12px;
-        padding: 0 5px;
-        width: auto;
-      }
-      .LogoTitle {
-        width: 150px;
-        margin-top: 60px;
-      }
-      .p3d {
-        margin-top: 80px;
-        height: 300px;
-      }
-      .titleShow {
-        padding-top: 30px;
-        height: 600px;
-        padding-bottom: 20px;
-      }
-      .featureCard {
-        width: 90%;
-        padding: 20px;
-      }
-      .featureCard:hover {
-        width: 90%;
-        height: auto;
-        min-height: 150px;
-      }
-      .titleF {
-        font-size: medium;
-        padding: 0 10px;
-      }
-      .titleFintor {
-        font-size: small;
-        padding: 0 10px;
-      }
-      .backgroundF {
-        height: 600px;
-        margin-top: -20px;
-      }
-      .features {
-        min-height: 500px;
-      }
-      .updateT {
-        font-size: large;
-      }
-      .updateTIn {
-        font-size: small;
-      }
-      .ubg {
-        margin-top: -80px;
-      }
-      .end {
-        padding: 30px 15px;
-      }
-      .endlogo {
-        width: 120px;
-      }
-      .endby {
-        font-size: medium;
-      }
-      .link {
-        font-size: medium;
-      }
-      .introend {
-        font-size: 11px;
-        line-height: 1.5;
-      }
-      .footerT {
-        font-size: 9px;
-      }
-      .download-cards {
-        gap: 12px;
-      }
-      .download-card {
-        width: 95%;
-        padding: 20px 25px;
-      }
-      .download-name {
-        font-size: 1.1rem;
-      }
-      .download-panel {
-        max-height: 400px;
-      }
-      .download-panel.show {
-        max-height: 400px;
-        padding: 10px 0;
-      }
-      .download-item {
-        padding: 14px 8px;
-        flex-direction: column;
-        gap: 5px;
-      }
-      .download-item-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-      }
-      .download-item-name {
-        font-size: 13px;
-        word-break: break-all;
-      }
-      .download-item-size {
-        font-size: 11px;
-      }
-      .download-btn {
-        width: 100%;
-        padding: 10px;
-        font-size: 13px;
-      }
-      .proxy-menu {
-        min-width: 150px;
-        right: -15px;
-      }
-      .proxy-option {
-        padding: 13px 12px;
-        font-size: 12px;
-      }
-      .tabButton a {
-        font-size: 12px;
-      }
-    }
-
-    @media (max-width: 320px) {
-      .slogan {
-        font-size: 20px;
-      }
-      .LogoTitle {
-        width: 120px;
-        margin-top: 40px;
-      }
-      .p3d {
-        height: 200px;
-      }
-      .titleShow {
-        height: 500px;
-      }
-      .featureCard {
-        width: 95%;
-        padding: 15px;
-      }
-      .featureCard:hover {
-        width: 95%;
-      }
-      .featureTitle {
-        font-size: 14px;
-      }
-      .featureDesc {
-        font-size: 12px;
-      }
-      .tabButton a {
-        font-size: 11px;
-      }
-      .download-card {
-        width: 98%;
-        padding: 15px 20px;
-      }
-      .download-name {
-        font-size: 1rem;
-      }
-      .filter-tab {
-        padding: 6px 10px;
-        font-size: 11px;
-      }
-      .proxy-menu {
-        min-width: 140px;
-        right: -20px;
-      }
-      .proxy-option {
-        padding: 12px 10px;
-        font-size: 11px;
-      }
-      .other-btn {
-        font-size: 12px;
-        padding: 0 6px;
-      }
-      .other-menu {
-        right: -15px;
-        min-width: 140px;
-      }
-      .endlogo {
-        width: 100px;
-      }
-      .endby {
-        font-size: small;
-      }
-      .link {
-        font-size: small;
-      }
-    }
   </style>
-  
-  <link rel="canonical" href="https://editors.astras.top/">
-  <meta http-equiv="content-security-policy" content="default-src 'none'; connect-src 'self'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;">
 </head>
 
 <body onload="initPointer()">
@@ -1801,7 +2515,7 @@
     
     results.sort((a, b) => a.latency - b.latency);
     
-    return results[0] && results[0].latency< Infinity ? results[0].proxy : 'ghproxy.net';
+    return results[0] && results[0].latency < Infinity ? results[0].proxy : 'ghproxy.net';
   }
 
   async function autoSelectFastestProxy() {
@@ -2131,7 +2845,7 @@
   }
 
   async function loadReleaseData(releaseIndex) {
-    if (releaseIndex< 0 || releaseIndex >= allReleases.length) {
+    if (releaseIndex < 0 || releaseIndex >= allReleases.length) {
       return;
     }
 
@@ -2188,7 +2902,7 @@
 
     let delay = 0.1;
     cards.forEach(card => {
-      if (card.assets.length >0 || card.key === 'source') {
+      if (card.assets.length > 0 || card.key === 'source') {
         html += `<div class="download-card fade-in-up magnetic-target" style="animation-delay: ${delay}s" onclick="switchPlatform('${card.key}')">`;
         html += `<div class="download-name" data-i18n="${card.key === 'source' ? '源码' : ''}">${card.name}</div>`;
         html += '</div>';
@@ -2283,7 +2997,7 @@
       );
       const scrollableHeight = documentHeight - windowHeight;
       
-      if (scrollableHeight >0) {
+      if (scrollableHeight > 0) {
         const scrollProgress = scrollY / scrollableHeight;
         
         const translateX = (scrollProgress * 2 - 1) * 27;
@@ -2295,4 +3009,6 @@
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-  }
+  }</script>
+</body>
+</html>
