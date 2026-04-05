@@ -862,6 +862,7 @@
       margin-bottom: 15px;
       flex-wrap: wrap;
       align-items: center;
+      width: 100%;
     }
 
     .filter-tab {
@@ -2124,15 +2125,15 @@
           <button class="filter-tab active" onclick="selectFilter('all')" data-i18n="全部">全部</button>
           <button class="filter-tab" onclick="selectFilter('amd')" data-i18n="amd">AMD64</button>
           <button class="filter-tab" onclick="selectFilter('arm')" data-i18n="arm">ARM64</button>
-          <button class="filter-tab" onclick="selectFilter('arm32')" data-i18n="arm32">ARM</button>
+          <button class="filter-tab" onclick="selectFilter('arm32')" data-i18n="arm32">armv7</button>
           <span style="color:var(--text-secondary);font-size:12px;margin:0 8px">|</span>
           <button class="filter-tab" onclick="selectFilter('deb')" data-i18n="deb">.deb</button>
           <button class="filter-tab" onclick="selectFilter('rpm')" data-i18n="rpm">.rpm</button>
           <button class="filter-tab" onclick="selectFilter('appimage')" data-i18n="appimage">AppImage</button>
           <button class="filter-tab" onclick="selectFilter('tar')" data-i18n="tar">.tar.gz</button>
           <button class="filter-tab" onclick="selectFilter('tarxz')" data-i18n="tarxz">.tar.xz</button>
-          <button class="filter-tab" onclick="selectFilter('sh')" data-i18n="sh">.sh</button>
-          <button class="filter-tab" onclick="selectFilter('bin')" data-i18n="bin">.bin</button>
+          <button class="filter-tab" onclick="selectFilter('pkgzst')" data-i18n="pkgzst">.pkg.tar.zst</button>
+          <button class="filter-tab" onclick="selectFilter('tarzst')" data-i18n="tarzst">.tar.zst</button>
           <button class="filter-tab" onclick="selectFilter('zip')" data-i18n="zip">.zip</button>
         </div>
       `;
@@ -2172,7 +2173,12 @@
       itemsHtml += `<span class="download-item-name">${asset.name}</span>`;
       itemsHtml += '</div>';
     });
-    items.innerHTML = filterTabsHtml + itemsHtml;
+    const existingFilters = title.nextElementSibling;
+    if (existingFilters && existingFilters.classList.contains('filter-tabs')) {
+      existingFilters.remove();
+    }
+    title.insertAdjacentHTML('afterend', filterTabsHtml);
+    items.innerHTML = itemsHtml;
     currentPlatform = key;
     currentArch = 'all';
     currentSuffix = 'all';
@@ -2223,8 +2229,8 @@
       if (name.endsWith('.appimage') || name.includes('appimage')) return 'appimage';
       if (name.endsWith('.tar.gz') || name.endsWith('.tgz')) return 'tar';
       if (name.endsWith('.tar.xz') || name.endsWith('.txz')) return 'tarxz';
-      if (name.endsWith('.sh') || name.includes('-sh-')) return 'sh';
-      if (name.endsWith('.bin')) return 'bin';
+      if (name.endsWith('.pkg.tar.zst')) return 'pkgzst';
+      if (name.endsWith('.tar.zst')) return 'tarzst';
       if (name.endsWith('.zip')) return 'zip';
       return 'other';
     }
@@ -2232,7 +2238,7 @@
 
   function selectFilter(value) {
     const archValues = ['amd', 'arm', 'arm32', 'x64', 'x86', 'arm64'];
-    const suffixValues = ['deb', 'rpm', 'appimage', 'tar', 'tarxz', 'sh', 'bin', 'zip', 'exe', 'msi', 'dmg', 'pkg', 'appx'];
+    const suffixValues = ['deb', 'rpm', 'appimage', 'tar', 'tarxz', 'pkgzst', 'tarzst', 'zip', 'exe', 'msi', 'dmg', 'pkg', 'appx'];
 
     const allTab = document.querySelector('.filter-tab[data-i18n="全部"]');
 
@@ -2660,15 +2666,16 @@
       'QQ': 'QQ',
       'amd': 'AMD64',
       'arm': 'ARM64',
-      'arm32': 'ARM',
+      'arm32': 'armv7',
       '全部': '全部',
       'deb': '.deb',
       'rpm': '.rpm',
       'appimage': 'AppImage',
       'tar': '.tar.gz',
       'tarxz': '.tar.xz',
-      'sh': '.sh',
-      'bin': '.bin',
+      'pkgzst': '.pkg.tar.zst',
+      'tarzst': '.tar.zst',
+
       'zip': '.zip',
       'x64': 'x64',
       'x86': 'x86',
@@ -2711,15 +2718,16 @@
       'QQ': 'QQ',
       'amd': 'AMD64',
       'arm': 'ARM64',
-      'arm32': 'ARM',
+      'arm32': 'armv7',
       '全部': 'All',
       'deb': '.deb',
       'rpm': '.rpm',
       'appimage': 'AppImage',
       'tar': '.tar.gz',
       'tarxz': '.tar.xz',
-      'sh': '.sh',
-      'bin': '.bin',
+      'pkgzst': '.pkg.tar.zst',
+      'tarzst': '.tar.zst',
+
       'zip': '.zip',
       'x64': 'x64',
       'x86': 'x86',
